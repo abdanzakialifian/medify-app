@@ -1,4 +1,4 @@
-package com.medify.app.designsystem.ui.theme
+package com.medify.app.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -13,7 +13,9 @@ import com.medify.app.R
 private val Gilroy = FontFamily(
     Font(resId = R.font.gilroy_regular, weight = FontWeight.Normal),
     Font(resId = R.font.gilroy_medium, weight = FontWeight.Medium),
+    Font(resId = R.font.gilroy_semi_bold, weight = FontWeight.SemiBold),
     Font(resId = R.font.gilroy_bold, weight = FontWeight.Bold),
+    Font(resId = R.font.gilroy_extra_bold, weight = FontWeight.ExtraBold),
 )
 val Typography = Typography(
     displayLarge = TextStyle(

@@ -1,4 +1,4 @@
-package com.medify.app.designsystem.ui.theme
+package com.medify.app.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
