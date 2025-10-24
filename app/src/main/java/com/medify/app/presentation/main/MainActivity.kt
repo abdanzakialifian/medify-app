@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.medify.app.designsystem.ui.theme.MedifyTheme
+import com.medify.app.designsystem.theme.MedifyTheme
 import com.medify.app.navigation.MainNavGraph
 
 class MainActivity : ComponentActivity() {
