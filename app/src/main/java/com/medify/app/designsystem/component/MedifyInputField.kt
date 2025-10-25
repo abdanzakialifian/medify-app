@@ -78,7 +78,7 @@ fun MedifyInputField(
                     Text(
                         text = placeholder,
                         style = TextStyle(
-                            fontFamily = FontFamily(Font(R.font.gilroy_regular)),
+                            fontFamily = FontFamily(Font(R.font.proximanova_regular)),
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 12.sp,
                         )
