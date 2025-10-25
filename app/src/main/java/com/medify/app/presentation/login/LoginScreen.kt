@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,13 +37,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.DialogProperties
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.medify.app.R
+import com.medify.app.designsystem.component.LoadingDialog
 import com.medify.app.designsystem.component.MedifyInputField
 import com.medify.app.designsystem.theme.MedifyTheme
+import com.medify.app.helper.PopupErrorDialog
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -60,7 +62,13 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
             viewModel.onEvent(LoginEvent.OnPasswordValueChange(password))
         },
         onPasswordVisibilityChange = {
-            viewModel.onEvent(LoginEvent.OnPasswordVisibilityChange)
+            viewModel.onEvent(LoginEvent.OnPasswordVisibilityChange(!uiState.isPasswordVisible))
+        },
+        onLoginClick = {
+            viewModel.onEvent(LoginEvent.OnLoginClick(email = uiState.email, password = uiState.password))
+        },
+        onDismissPopupErrorDialog = {
+            viewModel.onEvent(LoginEvent.OnDismissPopupErrorDialog)
         }
     )
 }
@@ -71,6 +79,8 @@ private fun LoginContent(
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
     onPasswordVisibilityChange: () -> Unit,
+    onLoginClick: () -> Unit,
+    onDismissPopupErrorDialog: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -93,6 +103,18 @@ private fun LoginContent(
             registerNowTitleText,
             copyRightText,
         ) = createRefs()
+
+        if (uiState.isLoginLoading) {
+            LoadingDialog(properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false))
+        }
+
+        if (uiState.loginError != null) {
+            PopupErrorDialog(
+                throwable = uiState.loginError,
+                onButtonClick = onDismissPopupErrorDialog,
+                onDismissRequest = onDismissPopupErrorDialog
+            )
+        }
 
         createHorizontalChain(welcomeGreetingText, welcomeTitleText, chainStyle = ChainStyle.Packed)
 
@@ -251,8 +273,9 @@ private fun LoginContent(
                 end.linkTo(parent.end)
                 width = Dimension.fillToConstraints
             },
+            enabled = uiState.email.isNotEmpty() && uiState.password.isNotEmpty(),
             shape = RoundedCornerShape(8.dp),
-            onClick = {},
+            onClick = onLoginClick,
             content = {
                 Row(
                     modifier = Modifier
@@ -339,7 +362,9 @@ private fun LoginContentPreview() {
             uiState = LoginUiState(),
             onEmailChanged = {},
             onPasswordChanged = {},
-            onPasswordVisibilityChange = {}
+            onPasswordVisibilityChange = {},
+            onLoginClick = {},
+            onDismissPopupErrorDialog = {}
         )
     }
 }

@@ -7,4 +7,8 @@ data class LoginUiState(
     val email: String = "",
     val password: String = "",
     val isPasswordVisible: Boolean = false,
+
+    val isLoginLoading: Boolean = false,
+    val loginToken: String = "",
+    val loginError: Throwable? = null,
 )
