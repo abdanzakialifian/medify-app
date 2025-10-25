@@ -16,6 +16,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -48,10 +49,17 @@ fun MedifyInputField(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Card(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 8.dp,
+                    shape = RoundedCornerShape(8.dp),
+                    spotColor = MaterialTheme.colorScheme.outline,
+                    ambientColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.24f)
+                ),
             shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-            elevation = CardDefaults.cardElevation(defaultElevation = 0.5.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             TextField(
                 modifier = Modifier
