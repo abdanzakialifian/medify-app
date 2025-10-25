@@ -49,4 +49,26 @@
     <string name="register">Register</string>
     <string name="login_now">Login now</string>
     <string name="already_have_account">Already have an account?</string>
+    <string name="all_product">All Products</string>
+    <string name="health_services">Health Services</string>
+    <string name="medical_equipment">Medical Equipment</string>
+    <string name="medicine_and_vitamins">Medicine &amp; Vitamins</string>
+    <string name="mother_and_baby">Mother &amp; Baby</string>
+    <string name="beauty">Beauty</string>
+    <string name="unit">Unit</string>
+    <string name="checkup_package">Checkup Package</string>
+    <string name="title_solution_prefix">Solution, </string>
+    <string name="title_solution_suffix">Your Health</string>
+    <string name="subtitle_health_info">Stay updated with the latest health information here!</string>
+    <string name="button_more">Learn More</string>
+    <string name="covid_test_title">Covid-19 Test, Prevent Corona Early</string>
+    <string name="track_examination_title">Track Examination</string>
+    <string name="track_examination_subtitle">You can check your examination progress here</string>
+    <string name="button_track">Track</string>
+    <string name="search_hint">Search</string>
+    <string name="choose_service_type">Choose Your Health Service Type</string>
+    <string name="show_more">Show More</string>
+    <string name="ready_stock">Ready Stock</string>
+    <string name="empty_stock">Out of Stock</string>
+    <string name="special_service">Special Service</string>
 </resources>

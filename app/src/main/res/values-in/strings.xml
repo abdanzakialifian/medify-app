@@ -48,5 +48,26 @@
     <string name="error_password_not_match">Password tidak sama</string>
     <string name="register">Register</string>
     <string name="login_now">Login sekarang</string>
-    <string name="already_have_account">Sudah punya akun?</string>
+    <string name="already_have_account">Sudah punya akun?</string><string name="all_product">Semua Produk</string>
+    <string name="health_services">Layanan Kesehatan</string>
+    <string name="medical_equipment">Alat Kesehatan</string>
+    <string name="medicine_and_vitamins">Obat &amp; Vitamin</string>
+    <string name="mother_and_baby">Ibu &amp; Bayi</string>
+    <string name="beauty">Kecantikan</string>
+    <string name="unit">Satuan</string>
+    <string name="checkup_package">Paket Pemeriksaan</string>
+    <string name="title_solution_prefix">Solusi, </string>
+    <string name="title_solution_suffix">Kesehatan Anda</string>
+    <string name="subtitle_health_info">Update informasi seputar kesehatan semua bisa disini !</string>
+    <string name="button_more">Selengkapnya</string>
+    <string name="covid_test_title">Tes Covid 19, Cegah Corona Sedini Mungkin</string>
+    <string name="track_examination_title">Track Pemeriksaan</string>
+    <string name="track_examination_subtitle">Kamu dapat mengecek progress pemeriksaanmu disini</string>
+    <string name="button_track">Track</string>
+    <string name="search_hint">Search</string>
+    <string name="choose_service_type">Pilih Tipe Layanan Kesehatan Anda</string>
+    <string name="show_more">Tampilkan Lebih Banyak</string>
+    <string name="ready_stock">Ready Stock</string>
+    <string name="empty_stock">Empty Stock</string>
+    <string name="special_service">Layanan Khusus</string>
 </resources>
