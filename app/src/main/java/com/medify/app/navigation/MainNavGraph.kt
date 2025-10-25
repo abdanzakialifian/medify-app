@@ -1,8 +1,6 @@
 package com.medify.app.navigation
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,10 +11,10 @@ import com.medify.app.presentation.profile.ProfileScreen
 import com.medify.app.presentation.registration.RegistrationScreen
 
 @Composable
-fun MainNavGraph(modifier: Modifier = Modifier) {
+fun MainNavGraph() {
     val navController: NavHostController = rememberNavController()
 
-    NavHost(modifier = modifier, navController = navController, startDestination = Screen.Login.route) {
+    NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(route = Screen.Login.route) {
             LoginScreen {
                 navController.navigate(Screen.Registration.route)
