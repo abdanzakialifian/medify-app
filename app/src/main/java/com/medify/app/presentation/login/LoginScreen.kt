@@ -6,17 +6,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
@@ -220,6 +223,24 @@ private fun LoginContent(
             errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else stringResource(R.string.error_email_invalid),
             onValueChange = onEmailChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            trailingIcon = {
+                if (uiState.email.isNotEmpty()) {
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(20.dp),
+                        onClick = {
+                            onEmailChange("")
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Filled.Clear,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
+            }
         )
 
         createHorizontalChain(passwordTitleText, forgotPasswordTitleText, chainStyle = ChainStyle.SpreadInside)
@@ -277,18 +298,35 @@ private fun LoginContent(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
             visualTransformation = if (uiState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .size(20.dp),
-                    onClick = onPasswordVisibilityChange,
-                    content = {
-                        Icon(
-                            imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
-                            contentDescription = null,
+                Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp)) {
+                    if (uiState.password.isNotEmpty()) {
+                        IconButton(
+                            modifier = Modifier.size(20.dp),
+                            onClick = {
+                                onPasswordChange("")
+                            },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Filled.Clear,
+                                    contentDescription = null,
+                                )
+                            }
                         )
                     }
-                )
+
+                    Spacer(Modifier.width(8.dp))
+
+                    IconButton(
+                        modifier = Modifier.size(20.dp),
+                        onClick = onPasswordVisibilityChange,
+                        content = {
+                            Icon(
+                                imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
             }
         )
 

@@ -20,6 +20,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
@@ -69,7 +70,7 @@ fun RegistrationScreen(viewModel: RegisterViewModel = koinViewModel(), onLoginNo
         onFirstNameChange = { firstName ->
             viewModel.onEvent(RegisterEvent.OnFirstNameValueChange(firstName))
         },
-        onLastNameNameChange = { lastName ->
+        onLastNameChange = { lastName ->
             viewModel.onEvent(RegisterEvent.OnLastNameValueChange(lastName))
         },
         onIdNumberChange = { idNumber ->
@@ -105,7 +106,7 @@ fun RegistrationScreen(viewModel: RegisterViewModel = koinViewModel(), onLoginNo
 private fun RegistrationContent(
     uiState: RegisterUiState,
     onFirstNameChange: (String) -> Unit,
-    onLastNameNameChange: (String) -> Unit,
+    onLastNameChange: (String) -> Unit,
     onIdNumberChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPhoneNoChange: (String) -> Unit,
@@ -229,6 +230,24 @@ private fun RegistrationContent(
                     placeholder = stringResource(R.string.first_name_placeholder),
                     onValueChange = onFirstNameChange,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Done),
+                    trailingIcon = {
+                        if (uiState.firstName.isNotEmpty()) {
+                            IconButton(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .size(20.dp),
+                                onClick = {
+                                    onFirstNameChange("")
+                                },
+                                content = {
+                                    Icon(
+                                        imageVector = Icons.Filled.Clear,
+                                        contentDescription = null,
+                                    )
+                                }
+                            )
+                        }
+                    }
                 )
             }
 
@@ -248,8 +267,26 @@ private fun RegistrationContent(
                         .padding(top = 8.dp),
                     value = uiState.lastName,
                     placeholder = stringResource(R.string.last_name_placeholder),
-                    onValueChange = onLastNameNameChange,
+                    onValueChange = onLastNameChange,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Done),
+                    trailingIcon = {
+                        if (uiState.lastName.isNotEmpty()) {
+                            IconButton(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .size(20.dp),
+                                onClick = {
+                                    onLastNameChange("")
+                                },
+                                content = {
+                                    Icon(
+                                        imageVector = Icons.Filled.Clear,
+                                        contentDescription = null,
+                                    )
+                                }
+                            )
+                        }
+                    }
                 )
             }
         }
@@ -285,6 +322,24 @@ private fun RegistrationContent(
                 }
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
+            trailingIcon = {
+                if (uiState.idNumber.isNotEmpty()) {
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(20.dp),
+                        onClick = {
+                            onIdNumberChange("")
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Filled.Clear,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
+            }
         )
 
         Text(
@@ -314,6 +369,24 @@ private fun RegistrationContent(
             errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else stringResource(R.string.error_email_invalid),
             onValueChange = onEmailChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            trailingIcon = {
+                if (uiState.email.isNotEmpty()) {
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(20.dp),
+                        onClick = {
+                            onEmailChange("")
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Filled.Clear,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
+            }
         )
 
         Text(
@@ -347,6 +420,24 @@ private fun RegistrationContent(
                 }
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone, imeAction = ImeAction.Done),
+            trailingIcon = {
+                if (uiState.phoneNo.isNotEmpty()) {
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(20.dp),
+                        onClick = {
+                            onPhoneNoChange("")
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Filled.Clear,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
+            }
         )
 
         Text(
@@ -378,18 +469,35 @@ private fun RegistrationContent(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
             visualTransformation = if (uiState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .size(20.dp),
-                    onClick = onPasswordVisibilityChange,
-                    content = {
-                        Icon(
-                            imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
-                            contentDescription = null,
+                Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp)) {
+                    if (uiState.password.isNotEmpty()) {
+                        IconButton(
+                            modifier = Modifier.size(20.dp),
+                            onClick = {
+                                onPasswordChange("")
+                            },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Filled.Clear,
+                                    contentDescription = null,
+                                )
+                            }
                         )
                     }
-                )
+
+                    Spacer(Modifier.width(8.dp))
+
+                    IconButton(
+                        modifier = Modifier.size(20.dp),
+                        onClick = onPasswordVisibilityChange,
+                        content = {
+                            Icon(
+                                imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
             }
         )
 
@@ -426,18 +534,35 @@ private fun RegistrationContent(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
             visualTransformation = if (uiState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .size(20.dp),
-                    onClick = onPasswordVisibilityChange,
-                    content = {
-                        Icon(
-                            imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
-                            contentDescription = null,
+                Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp)) {
+                    if (uiState.confirmPassword.isNotEmpty()) {
+                        IconButton(
+                            modifier = Modifier.size(20.dp),
+                            onClick = {
+                                onConfirmPasswordChange("")
+                            },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Filled.Clear,
+                                    contentDescription = null,
+                                )
+                            }
                         )
                     }
-                )
+
+                    Spacer(Modifier.width(8.dp))
+
+                    IconButton(
+                        modifier = Modifier.size(20.dp),
+                        onClick = onPasswordVisibilityChange,
+                        content = {
+                            Icon(
+                                imageVector = if (uiState.isPasswordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
+                                contentDescription = null,
+                            )
+                        }
+                    )
+                }
             }
         )
 
@@ -547,7 +672,7 @@ private fun RegistrationContentPreview() {
         RegistrationContent(
             uiState = RegisterUiState(),
             onFirstNameChange = {},
-            onLastNameNameChange = {},
+            onLastNameChange = {},
             onIdNumberChange = {},
             onEmailChange = {},
             onPhoneNoChange = {},
