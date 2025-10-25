@@ -1,6 +1,10 @@
 package com.medify.app.presentation.login
 
+import android.widget.Toast
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -52,15 +57,17 @@ import com.medify.app.helper.isValidEmail
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
+fun LoginScreen(viewModel: LoginViewModel = koinViewModel(), onRegisterNowClick: () -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val activity = LocalActivity.current
 
     LoginContent(
         uiState = uiState,
-        onEmailChanged = { email ->
+        onEmailChange = { email ->
             viewModel.onEvent(LoginEvent.OnEmailValueChange(email))
         },
-        onPasswordChanged = { password ->
+        onPasswordChange = { password ->
             viewModel.onEvent(LoginEvent.OnPasswordValueChange(password))
         },
         onPasswordVisibilityChange = {
@@ -71,18 +78,28 @@ fun LoginScreen(viewModel: LoginViewModel = koinViewModel()) {
         },
         onDismissPopupErrorDialog = {
             viewModel.onEvent(LoginEvent.OnDismissPopupErrorDialog)
-        }
+        },
+        onForgotPasswordClick = {
+            Toast.makeText(
+                activity,
+                activity?.resources?.getString(R.string.feature_not_available),
+                Toast.LENGTH_SHORT
+            ).show()
+        },
+        onRegisterNowClick = onRegisterNowClick
     )
 }
 
 @Composable
 private fun LoginContent(
     uiState: LoginUiState,
-    onEmailChanged: (String) -> Unit,
-    onPasswordChanged: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onPasswordVisibilityChange: () -> Unit,
     onLoginClick: () -> Unit,
     onDismissPopupErrorDialog: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
+    onRegisterNowClick: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -200,8 +217,8 @@ private fun LoginContent(
                 .padding(top = 8.dp),
             value = uiState.email,
             placeholder = stringResource(R.string.email_placeholder),
-            errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else "Email tidak valid",
-            onValueChange = onEmailChanged,
+            errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else stringResource(R.string.error_email_invalid),
+            onValueChange = onEmailChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
         )
 
@@ -229,7 +246,12 @@ private fun LoginContent(
                     bottom.linkTo(passwordTitleText.bottom)
                     width = Dimension.preferredWrapContent
                     horizontalBias = 1F
-                },
+                }
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = onForgotPasswordClick
+                ),
             text = stringResource(R.string.forgot_password),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_bold)),
@@ -250,8 +272,8 @@ private fun LoginContent(
                 .padding(top = 8.dp),
             value = uiState.password,
             placeholder = stringResource(R.string.password_placeholder),
-            errorMessage = if (uiState.password.isBlank() || uiState.password.length >= 8) "" else "Password minimal 8 karakter",
-            onValueChange = onPasswordChanged,
+            errorMessage = if (uiState.password.isBlank() || uiState.password.length >= 8) "" else stringResource(R.string.error_password_min_length),
+            onValueChange = onPasswordChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
             visualTransformation = if (uiState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -277,7 +299,7 @@ private fun LoginContent(
                 end.linkTo(parent.end)
                 width = Dimension.fillToConstraints
             },
-            enabled = uiState.email.isNotBlank() && uiState.email.isValidEmail() && uiState.password.isNotBlank() && uiState.password.length >= 8,
+            enabled = (uiState.email.isNotBlank() && uiState.email.isValidEmail()) && (uiState.password.isNotBlank() && uiState.password.length >= 8),
             shape = RoundedCornerShape(8.dp),
             onClick = onLoginClick,
             content = {
@@ -330,7 +352,12 @@ private fun LoginContent(
                     bottom.linkTo(noAccountTitleText.bottom)
                     width = Dimension.preferredWrapContent
                 }
-                .padding(start = 4.dp),
+                .padding(start = 4.dp)
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = onRegisterNowClick
+                ),
             text = stringResource(R.string.register_now),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_bold)),
@@ -365,11 +392,13 @@ private fun LoginContentPreview() {
     MedifyTheme {
         LoginContent(
             uiState = LoginUiState(),
-            onEmailChanged = {},
-            onPasswordChanged = {},
+            onEmailChange = {},
+            onPasswordChange = {},
             onPasswordVisibilityChange = {},
             onLoginClick = {},
-            onDismissPopupErrorDialog = {}
+            onDismissPopupErrorDialog = {},
+            onForgotPasswordClick = {},
+            onRegisterNowClick = {}
         )
     }
 }
