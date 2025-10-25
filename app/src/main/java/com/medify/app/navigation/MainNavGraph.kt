@@ -18,10 +18,14 @@ fun MainNavGraph(modifier: Modifier = Modifier) {
 
     NavHost(modifier = modifier, navController = navController, startDestination = Screen.Login.route) {
         composable(route = Screen.Login.route) {
-            LoginScreen()
+            LoginScreen {
+                navController.navigate(Screen.Registration.route)
+            }
         }
         composable(route = Screen.Registration.route) {
-            RegistrationScreen()
+            RegistrationScreen {
+                navController.navigateUp()
+            }
         }
         composable(route = Screen.Dashboard.route) {
             DashboardScreen()

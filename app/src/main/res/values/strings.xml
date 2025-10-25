@@ -3,6 +3,7 @@
     <string name="greeting_hello">Hi,</string>
     <string name="welcome_title">Welcome</string>
     <string name="login_prompt">Please log in to continue</string>
+    <string name="register_prompt">Please register to continue</string>
     <string name="email_label">Email</string>
     <string name="email_placeholder">Enter your email</string>
     <string name="password_label">Password</string>
@@ -29,4 +30,23 @@
     <string name="error_unknown_title">Something Went Wrong</string>
     <string name="error_unknown_subtitle">An unexpected error occurred. Please try again.</string>
     <string name="button_ok">OK</string>
+    <string name="feature_not_available">This feature not available</string>
+    <string name="first_name_label">First Name</string>
+    <string name="first_name_placeholder">Enter your first name</string>
+    <string name="last_name_label">Last Name</string>
+    <string name="last_name_placeholder">Enter your last name</string>
+    <string name="id_number_label">ID Number</string>
+    <string name="id_number_placeholder">Enter your ID number</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="phone_number_placeholder">Enter your phone number</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="confirm_password_placeholder">Confirm your password</string>
+    <string name="error_nik_length">NIK must be 16 digits</string>
+    <string name="error_email_invalid">Invalid email address</string>
+    <string name="error_phone_invalid">Invalid phone number</string>
+    <string name="error_password_min_length">Password must be at least 8 characters</string>
+    <string name="error_password_not_match">Passwords do not match</string>
+    <string name="register">Register</string>
+    <string name="login_now">Login now</string>
+    <string name="already_have_account">Already have an account?</string>
 </resources>

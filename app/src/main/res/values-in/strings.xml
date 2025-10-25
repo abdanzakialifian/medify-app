@@ -4,6 +4,7 @@
     <string name="greeting_hello">Hai,</string>
     <string name="welcome_title">Selamat Datang</string>
     <string name="login_prompt">Silahkan login untuk melanjutkan</string>
+    <string name="register_prompt">Silahkan register untuk melanjutkan</string>
     <string name="email_label">Email</string>
     <string name="email_placeholder">Masukkan email anda</string>
     <string name="password_label">Password</string>
@@ -29,4 +30,23 @@
     <string name="error_unknown_title">Terjadi Kesalahan</string>
     <string name="error_unknown_subtitle">Ada sesuatu yang tidak beres. Silakan coba lagi.</string>
     <string name="button_ok">OK</string>
+    <string name="feature_not_available">Fitur ini belum tersedia</string>
+    <string name="first_name_label">Nama Depan</string>
+    <string name="first_name_placeholder">Masukkan nama depan anda</string>
+    <string name="last_name_label">Nama Belakang</string>
+    <string name="last_name_placeholder">Masukkan nama belakang anda</string>
+    <string name="id_number_label">No. KTP</string>
+    <string name="id_number_placeholder">Masukkan No. KTP anda</string>
+    <string name="phone_number_label">No. Telpon</string>
+    <string name="phone_number_placeholder">Masukkan No. Telpon anda</string>
+    <string name="confirm_password_label">Konfirmasi Password</string>
+    <string name="confirm_password_placeholder">Konfirmasi password anda</string>
+    <string name="error_nik_length">NIK harus 16 digit</string>
+    <string name="error_email_invalid">Email tidak valid</string>
+    <string name="error_phone_invalid">No. Telpon harus valid</string>
+    <string name="error_password_min_length">Password minimal 8 karakter</string>
+    <string name="error_password_not_match">Password tidak sama</string>
+    <string name="register">Register</string>
+    <string name="login_now">Login sekarang</string>
+    <string name="already_have_account">Sudah punya akun?</string>
 </resources>

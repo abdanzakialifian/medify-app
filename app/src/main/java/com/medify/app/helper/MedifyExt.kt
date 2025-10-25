@@ -21,3 +21,20 @@ fun Throwable.errorType(): ApiErrorType = when (this) {
 }
 
 fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this.trim()).matches()
+
+fun String.isValidIndonesianPhone(): Boolean {
+    val patterns = listOf(
+        Regex("^0[0-9]{9,12}$"),
+        Regex("^62[0-9]{9,12}$"),
+        Regex("^\\+62[0-9]{9,12}$")
+    )
+    return patterns.any { it.matches(this) }
+}
+
+fun String.normalizePhone(): String {
+    return when {
+        this.startsWith("+62") -> "0" + this.substring(3)
+        this.startsWith("62") -> "0" + this.substring(2)
+        else -> this
+    }
+}
