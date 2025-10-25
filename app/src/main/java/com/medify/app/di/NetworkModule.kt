@@ -1,6 +1,7 @@
 package com.medify.app.di
 
 import android.util.Log
+import com.medify.app.BuildConfig
 import com.medify.app.data.network.MedifyNetworkApi
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -25,7 +26,7 @@ val networkModule = module {
             }
             install(DefaultRequest) {
                 url("https://reqres.in/api/")
-                header("x-api-key", "reqres-free-v1")
+                header("x-api-key", BuildConfig.API_KEY) // api key store on local.properties (API_KEY="api key"), for get free api key https://reqres.in/
             }
             install(ContentNegotiation) {
                 json(Json { ignoreUnknownKeys = true })
