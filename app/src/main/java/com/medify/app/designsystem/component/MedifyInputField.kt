@@ -2,6 +2,7 @@ package com.medify.app.designsystem.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,6 +32,7 @@ fun MedifyInputField(
     value: String,
     placeholder: String,
     modifier: Modifier = Modifier,
+    errorMessage: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
     singleLine: Boolean = false,
@@ -44,57 +46,71 @@ fun MedifyInputField(
     trailingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit,
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.5.dp)
-    ) {
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background),
-            value = value,
-            onValueChange = onValueChange,
-            enabled = enabled,
-            readOnly = readOnly,
-            textStyle = TextStyle(
-                fontFamily = FontFamily(Font(R.font.proximanova_semi_bold)),
-                color = MaterialTheme.colorScheme.primary,
-                fontSize = 12.sp,
-            ),
-            placeholder = {
-                Text(
-                    text = placeholder,
-                    style = TextStyle(
-                        fontFamily = FontFamily(Font(R.font.proximanova_regular)),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 12.sp,
-                    )
-                )
-            },
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            singleLine = singleLine,
-            maxLines = maxLines,
-            minLines = minLines,
-            interactionSource = interactionSource,
+    Column(modifier = modifier.fillMaxWidth()) {
+        Card(
+            modifier = modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
-            colors = TextFieldDefaults.colors(
-                cursorColor = MaterialTheme.colorScheme.outline,
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-                errorContainerColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
-        )
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.5.dp)
+        ) {
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background),
+                value = value,
+                onValueChange = onValueChange,
+                enabled = enabled,
+                readOnly = readOnly,
+                textStyle = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.proximanova_bold)),
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 12.sp,
+                ),
+                placeholder = {
+                    Text(
+                        text = placeholder,
+                        style = TextStyle(
+                            fontFamily = FontFamily(Font(R.font.gilroy_regular)),
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 12.sp,
+                        )
+                    )
+                },
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                visualTransformation = visualTransformation,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                singleLine = singleLine,
+                maxLines = maxLines,
+                minLines = minLines,
+                interactionSource = interactionSource,
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.colors(
+                    cursorColor = MaterialTheme.colorScheme.outline,
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                    errorContainerColor = Color.Transparent,
+                    errorIndicatorColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                ),
+            )
+        }
+
+        if (errorMessage.isNotBlank()) {
+            Text(
+                modifier = Modifier.padding(start = 12.dp, top = 4.dp),
+                text = errorMessage,
+                style = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.proximanova_regular)),
+                    color = Color.Red,
+                    fontSize = 10.sp,
+                )
+            )
+        }
     }
 }
 
@@ -102,11 +118,13 @@ fun MedifyInputField(
 @Composable
 private fun MedifyInputFieldPreview() {
     MedifyTheme {
-        MedifyInputField(
-            modifier = Modifier.padding(20.dp),
-            value = "",
-            onValueChange = {},
-            placeholder = "Masukkan Email Anda"
-        )
+        Column(modifier = Modifier.padding(20.dp)) {
+            MedifyInputField(
+                value = "",
+                placeholder = "Masukkan Email Anda",
+                errorMessage = "Email tidak valid",
+                onValueChange = {},
+            )
+        }
     }
 }

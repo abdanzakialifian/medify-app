@@ -1,5 +1,6 @@
 package com.medify.app.helper
 
+import android.util.Patterns
 import io.ktor.client.plugins.ClientRequestException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -18,3 +19,5 @@ fun Throwable.errorType(): ApiErrorType = when (this) {
 
     else -> ApiErrorType.Unknown
 }
+
+fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this.trim()).matches()

@@ -47,6 +47,7 @@ import com.medify.app.designsystem.component.LoadingDialog
 import com.medify.app.designsystem.component.MedifyInputField
 import com.medify.app.designsystem.theme.MedifyTheme
 import com.medify.app.helper.PopupErrorDialog
+import com.medify.app.helper.isValidEmail
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -195,11 +196,12 @@ private fun LoginContent(
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
                 }
-                .padding(top = 16.dp),
+                .padding(top = 8.dp),
             value = uiState.email,
             placeholder = "Masukkan email anda",
+            errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else "Email tidak valid",
             onValueChange = onEmailChanged,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
         )
 
         createHorizontalChain(passwordTitleText, forgotPasswordTitleText, chainStyle = ChainStyle.SpreadInside)
@@ -229,7 +231,7 @@ private fun LoginContent(
                 },
             text = "Lupa Password anda ?",
             style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.proximanova_semi_bold)),
+                fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.primaryContainer,
             ),
@@ -244,9 +246,10 @@ private fun LoginContent(
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
                 }
-                .padding(top = 16.dp),
+                .padding(top = 8.dp),
             value = uiState.password,
             placeholder = "Masukkan password anda",
+            errorMessage = if (uiState.password.isBlank() || uiState.password.length >= 8) "" else "Password minimal 8 karakter",
             onValueChange = onPasswordChanged,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
             visualTransformation = if (uiState.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -273,7 +276,7 @@ private fun LoginContent(
                 end.linkTo(parent.end)
                 width = Dimension.fillToConstraints
             },
-            enabled = uiState.email.isNotEmpty() && uiState.password.isNotEmpty(),
+            enabled = uiState.email.isNotBlank() && uiState.email.isValidEmail() && uiState.password.isNotBlank() && uiState.password.length >= 8,
             shape = RoundedCornerShape(8.dp),
             onClick = onLoginClick,
             content = {
@@ -329,10 +332,11 @@ private fun LoginContent(
                 .padding(start = 4.dp),
             text = "Belum punya akun? ",
             style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.proximanova_semi_bold)),
+                fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.SemiBold
             )
         )
 
@@ -345,7 +349,7 @@ private fun LoginContent(
             },
             text = "© SILK. all right reserved.",
             style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.proximanova_semi_bold)),
+                fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.outline,
                 textAlign = TextAlign.Center
