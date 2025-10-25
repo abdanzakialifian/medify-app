@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Medify</string>
+    <string name="greeting_hello">Hi,</string>
+    <string name="welcome_title">Welcome</string>
+    <string name="login_prompt">Please log in to continue</string>
+    <string name="email_label">Email</string>
+    <string name="email_placeholder">Enter your email</string>
+    <string name="password_label">Password</string>
+    <string name="password_placeholder">Enter your password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="no_account">Don’t have an account?</string>
+    <string name="register_now">Register now</string>
+    <string name="copyright_label" translatable="false">"© SILK. all right reserved."</string>
+    <string name="login">Login</string>
+    <string name="error_network_title">Connection Lost</string>
+    <string name="error_network_subtitle">Please check your internet connection and try again.</string>
+    <string name="error_timeout_title">Request Timed Out</string>
+    <string name="error_timeout_subtitle">The server took too long to respond.</string>
+    <string name="error_unauthorized_title">Session Expired</string>
+    <string name="error_unauthorized_subtitle">Please log in again to continue.</string>
+    <string name="error_forbidden_title">Access Denied</string>
+    <string name="error_forbidden_subtitle">You don’t have permission to perform this action.</string>
+    <string name="error_not_found_title">Data Not Found</string>
+    <string name="error_not_found_subtitle">The data you’re looking for is unavailable or has been deleted.</string>
+    <string name="error_bad_request_title">Invalid Request</string>
+    <string name="error_bad_request_subtitle">Please make sure the data you entered is correct.</string>
+    <string name="error_server_title">Server Error</string>
+    <string name="error_server_subtitle">Please try again later.</string>
+    <string name="error_unknown_title">Something Went Wrong</string>
+    <string name="error_unknown_subtitle">An unexpected error occurred. Please try again.</string>
+    <string name="button_ok">OK</string>
 </resources>

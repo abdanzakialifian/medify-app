@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -129,7 +130,7 @@ private fun LoginContent(
                     horizontalBias = 0F
                 }
                 .padding(top = 90.dp),
-            text = "Hai, ",
+            text = stringResource(R.string.greeting_hello),
             style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.primary,
         )
@@ -143,8 +144,8 @@ private fun LoginContent(
                     width = Dimension.preferredWrapContent
                     horizontalBias = 0F
                 }
-                .padding(top = 90.dp),
-            text = "Selamat Datang",
+                .padding(start = 4.dp, top = 90.dp),
+            text = stringResource(R.string.welcome_title),
             style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
             color = MaterialTheme.colorScheme.primary,
         )
@@ -159,7 +160,7 @@ private fun LoginContent(
                     horizontalBias = 0F
                 }
                 .padding(top = 4.dp),
-            text = "Silahkan login untuk melanjutkan",
+            text = stringResource(R.string.login_prompt),
             style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.secondaryContainer
         )
@@ -183,7 +184,7 @@ private fun LoginContent(
                 width = Dimension.preferredWrapContent
                 horizontalBias = 0F
             },
-            text = "Email",
+            text = stringResource(R.string.email_label),
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.primary
         )
@@ -198,7 +199,7 @@ private fun LoginContent(
                 }
                 .padding(top = 8.dp),
             value = uiState.email,
-            placeholder = "Masukkan email anda",
+            placeholder = stringResource(R.string.email_placeholder),
             errorMessage = if (uiState.email.isBlank() || uiState.email.isValidEmail()) "" else "Email tidak valid",
             onValueChange = onEmailChanged,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
@@ -214,7 +215,7 @@ private fun LoginContent(
                 width = Dimension.preferredWrapContent
                 horizontalBias = 0F
             },
-            text = "Password",
+            text = stringResource(R.string.password_label),
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.primary
         )
@@ -229,7 +230,7 @@ private fun LoginContent(
                     width = Dimension.preferredWrapContent
                     horizontalBias = 1F
                 },
-            text = "Lupa Password anda ?",
+            text = stringResource(R.string.forgot_password),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 14.sp,
@@ -248,7 +249,7 @@ private fun LoginContent(
                 }
                 .padding(top = 8.dp),
             value = uiState.password,
-            placeholder = "Masukkan password anda",
+            placeholder = stringResource(R.string.password_placeholder),
             errorMessage = if (uiState.password.isBlank() || uiState.password.length >= 8) "" else "Password minimal 8 karakter",
             onValueChange = onPasswordChanged,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
@@ -288,7 +289,7 @@ private fun LoginContent(
                 ) {
                     Text(
                         modifier = Modifier.weight(1F),
-                        text = "Login",
+                        text = stringResource(R.string.login),
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                         textAlign = TextAlign.Center
                     )
@@ -311,7 +312,7 @@ private fun LoginContent(
                 width = Dimension.preferredWrapContent
                 verticalBias = 0F
             },
-            text = "Belum punya akun?",
+            text = stringResource(R.string.no_account),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_regular)),
                 fontSize = 12.sp,
@@ -330,7 +331,7 @@ private fun LoginContent(
                     width = Dimension.preferredWrapContent
                 }
                 .padding(start = 4.dp),
-            text = "Belum punya akun? ",
+            text = stringResource(R.string.register_now),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 14.sp,
@@ -347,7 +348,7 @@ private fun LoginContent(
                 bottom.linkTo(parent.bottom)
                 verticalBias = 1F
             },
-            text = "© SILK. all right reserved.",
+            text = stringResource(R.string.copyright_label),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.proximanova_bold)),
                 fontSize = 12.sp,

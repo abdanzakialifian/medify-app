@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Medify</string>
+    <string name="greeting_hello">Hai,</string>
+    <string name="welcome_title">Selamat Datang</string>
+    <string name="login_prompt">Silahkan login untuk melanjutkan</string>
+    <string name="email_label">Email</string>
+    <string name="email_placeholder">Masukkan email anda</string>
+    <string name="password_label">Password</string>
+    <string name="password_placeholder">Masukkan password anda</string>
+    <string name="forgot_password">Lupa Password anda ?</string>
+    <string name="no_account">Belum punya akun?</string>
+    <string name="register_now">Daftar sekarang</string>
+    <string name="login">Masuk</string>
+    <string name="error_network_title">Koneksi Terputus</string>
+    <string name="error_network_subtitle">Periksa jaringan internet Anda dan coba lagi.</string>
+    <string name="error_timeout_title">Waktu Habis</string>
+    <string name="error_timeout_subtitle">Server membutuhkan waktu terlalu lama untuk merespons.</string>
+    <string name="error_unauthorized_title">Sesi Berakhir</string>
+    <string name="error_unauthorized_subtitle">Silakan login kembali untuk melanjutkan.</string>
+    <string name="error_forbidden_title">Akses Ditolak</string>
+    <string name="error_forbidden_subtitle">Anda tidak memiliki izin untuk melakukan tindakan ini.</string>
+    <string name="error_not_found_title">Data Tidak Ditemukan</string>
+    <string name="error_not_found_subtitle">Data yang Anda cari tidak tersedia atau sudah dihapus.</string>
+    <string name="error_bad_request_title">Permintaan Tidak Valid</string>
+    <string name="error_bad_request_subtitle">Pastikan data yang Anda masukkan sudah benar.</string>
+    <string name="error_server_title">Terjadi Kesalahan Server</string>
+    <string name="error_server_subtitle">Mohon coba lagi beberapa saat lagi.</string>
+    <string name="error_unknown_title">Terjadi Kesalahan</string>
+    <string name="error_unknown_subtitle">Ada sesuatu yang tidak beres. Silakan coba lagi.</string>
+    <string name="button_ok">OK</string>
+</resources>

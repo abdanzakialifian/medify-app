@@ -1,71 +1,73 @@
 package com.medify.app.helper
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.medify.app.R
 import com.medify.app.designsystem.component.PopupDialog
 
 @Composable
 fun PopupErrorDialog(throwable: Throwable, onButtonClick: () -> Unit, onDismissRequest: () -> Unit) {
     return when (throwable.errorType()) {
         ApiErrorType.Network -> PopupDialog(
-            title = "Koneksi Terputus",
-            subtitle = "Periksa jaringan internet Anda dan coba lagi.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_network_title),
+            subtitle = stringResource(R.string.error_network_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.Timeout -> PopupDialog(
-            title = "Waktu Habis",
-            subtitle = "Server membutuhkan waktu terlalu lama untuk merespons.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_timeout_title),
+            subtitle = stringResource(R.string.error_timeout_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.Unauthorized -> PopupDialog(
-            title = "Sesi Berakhir",
-            subtitle = "Silakan login kembali untuk melanjutkan.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_unauthorized_title),
+            subtitle = stringResource(R.string.error_unauthorized_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.Forbidden -> PopupDialog(
-            title = "Akses Ditolak",
-            subtitle = "Anda tidak memiliki izin untuk melakukan tindakan ini.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_forbidden_title),
+            subtitle = stringResource(R.string.error_forbidden_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.NotFound -> PopupDialog(
-            title = "Data Tidak Ditemukan",
-            subtitle = "Data yang Anda cari tidak tersedia atau sudah dihapus.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_not_found_title),
+            subtitle = stringResource(R.string.error_not_found_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.BadRequest -> PopupDialog(
-            title = "Permintaan Tidak Valid",
-            subtitle = "Pastikan data yang Anda masukkan sudah benar.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_bad_request_title),
+            subtitle = stringResource(R.string.error_bad_request_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.Server -> PopupDialog(
-            title = "Terjadi Kesalahan Server",
-            subtitle = "Mohon coba lagi beberapa saat lagi.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_server_title),
+            subtitle = stringResource(R.string.error_server_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
 
         ApiErrorType.Unknown -> PopupDialog(
-            title = "Terjadi Kesalahan",
-            subtitle = "Ada sesuatu yang tidak beres. Silakan coba lagi.",
-            buttonTitle = "OK",
+            title = stringResource(R.string.error_unknown_title),
+            subtitle = stringResource(R.string.error_unknown_subtitle),
+            buttonTitle = stringResource(R.string.button_ok),
             onButtonClick = onButtonClick,
             onDismissRequest = onDismissRequest,
         )
