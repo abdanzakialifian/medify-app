@@ -70,4 +70,10 @@
     <string name="ready_stock">Ready Stock</string>
     <string name="empty_stock">Empty Stock</string>
     <string name="special_service">Layanan Khusus</string>
+    <string name="my_profile">Profile Saya</string>
+    <string name="settings">Pengaturan</string>
+    <string name="follow_us_on">Ikuti kami di</string>
+    <string name="terms_and_conditions">Syarat dan Ketentuan</string>
+    <string name="faq">FAQ</string>
+    <string name="logout">Keluar</string>
 </resources>
