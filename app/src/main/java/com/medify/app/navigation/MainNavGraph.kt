@@ -16,9 +16,17 @@ fun MainNavGraph() {
 
     NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(route = Screen.Login.route) {
-            LoginScreen {
-                navController.navigate(Screen.Registration.route)
-            }
+            LoginScreen(
+                onRegisterNowClick = {
+                    navController.navigate(Screen.Registration.route)
+                },
+                onLoginSuccess = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(0)
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
         composable(route = Screen.Registration.route) {
             RegistrationScreen {
@@ -26,7 +34,14 @@ fun MainNavGraph() {
             }
         }
         composable(route = Screen.Dashboard.route) {
-            DashboardScreen()
+            DashboardScreen {
+                navController.navigate(Screen.Login.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            }
         }
         composable(route = Screen.Profile.route) {
             ProfileScreen()
