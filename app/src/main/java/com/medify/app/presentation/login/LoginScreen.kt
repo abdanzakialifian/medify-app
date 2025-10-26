@@ -5,6 +5,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -349,12 +350,13 @@ private fun LoginContent(
                 },
                 enabled = (uiState.email.isNotBlank() && uiState.email.isValidEmail()) && (uiState.password.isNotBlank() && uiState.password.length >= 8),
                 shape = RoundedCornerShape(8.dp),
+                contentPadding = PaddingValues.Zero,
                 onClick = onLoginClick,
                 content = {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 6.dp),
+                            .padding(vertical = 12.dp, horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
