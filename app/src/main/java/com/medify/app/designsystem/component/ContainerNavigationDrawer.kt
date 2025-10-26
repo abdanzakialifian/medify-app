@@ -60,9 +60,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContainerNavigationDrawer(
+    modifier: Modifier = Modifier,
+    isShowMenu: Boolean = true,
+    onMyProfileClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
     onFeatureNotAvailable: () -> Unit,
-    onMyProfileClick: () -> Unit,
-    onSettingsClick: () -> Unit,
     onLogoutClick: () -> Unit,
     onSocialMediaClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
@@ -73,11 +75,13 @@ fun ContainerNavigationDrawer(
 
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         ModalNavigationDrawer(
+            modifier = modifier,
             drawerState = drawerState,
             gesturesEnabled = true,
             scrimColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8F),
             drawerContent = {
                 ModalNavigationDrawerContent(
+                    isShowMenu = isShowMenu,
                     onCloseClick = {
                         coroutineScope.launch {
                             if (drawerState.isOpen) {
@@ -85,9 +89,30 @@ fun ContainerNavigationDrawer(
                             }
                         }
                     },
-                    onMyProfileClick = onMyProfileClick,
-                    onSettingsClick = onSettingsClick,
-                    onLogoutClick = onLogoutClick,
+                    onMyProfileClick = {
+                        coroutineScope.launch {
+                            if (drawerState.isOpen) {
+                                drawerState.close()
+                                onMyProfileClick()
+                            }
+                        }
+                    },
+                    onSettingsClick = {
+                        coroutineScope.launch {
+                            if (drawerState.isOpen) {
+                                drawerState.close()
+                                onSettingsClick()
+                            }
+                        }
+                    },
+                    onLogoutClick = {
+                        coroutineScope.launch {
+                            if (drawerState.isOpen) {
+                                drawerState.close()
+                                onLogoutClick()
+                            }
+                        }
+                    },
                     onSocialMediaClick = onSocialMediaClick
                 )
             },
@@ -151,6 +176,7 @@ fun ContainerNavigationDrawer(
 
 @Composable
 private fun ModalNavigationDrawerContent(
+    isShowMenu: Boolean,
     onCloseClick: () -> Unit,
     onMyProfileClick: () -> Unit,
     onSettingsClick: () -> Unit,
@@ -203,7 +229,7 @@ private fun ModalNavigationDrawerContent(
                         }
                         .padding(start = 16.dp),
                     text = "Abdan Zaki Alifian",
-                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.primary
                 )
 
@@ -219,89 +245,94 @@ private fun ModalNavigationDrawerContent(
                         }
                         .padding(start = 16.dp),
                     text = "Android Developer",
-                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold, fontSize = 10.sp),
-                    color = MaterialTheme.colorScheme.primary
+                    style = TextStyle(
+                        fontFamily = FontFamily(Font(R.font.proximanova_bold)),
+                        fontSize = 10.sp,
+                        color = MaterialTheme.colorScheme.primary
+                    ),
                 )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(0.6F)
-                        .constrainAs(profile) {
-                            start.linkTo(parent.start)
-                            top.linkTo(photoProfile.bottom)
-                            end.linkTo(parent.end)
-                            horizontalBias = 0F
-                        }
-                        .padding(top = 20.dp)
-                        .clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                            onClick = onMyProfileClick
-                        ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
+                if (isShowMenu) {
+                    Row(
                         modifier = Modifier
-                            .weight(1F)
-                            .padding(vertical = 10.dp),
-                        text = stringResource(R.string.my_profile),
-                        style = TextStyle(
-                            fontFamily = FontFamily(Font(R.font.gilroy_semi_bold)),
-                            fontSize = 12.sp,
-                            color = GrayRegular
+                            .fillMaxWidth(0.6F)
+                            .constrainAs(profile) {
+                                start.linkTo(parent.start)
+                                top.linkTo(photoProfile.bottom)
+                                end.linkTo(parent.end)
+                                horizontalBias = 0F
+                            }
+                            .padding(top = 20.dp)
+                            .clickable(
+                                indication = null,
+                                interactionSource = remember { MutableInteractionSource() },
+                                onClick = onMyProfileClick
+                            ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .weight(1F)
+                                .padding(vertical = 10.dp),
+                            text = stringResource(R.string.my_profile),
+                            style = TextStyle(
+                                fontFamily = FontFamily(Font(R.font.gilroy_semi_bold)),
+                                fontSize = 12.sp,
+                                color = GrayRegular
+                            )
                         )
-                    )
 
-                    Icon(
-                        modifier = Modifier.size(12.dp),
-                        imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
-                        contentDescription = null,
-                        tint = GrayRegular
-                    )
-                }
+                        Icon(
+                            modifier = Modifier.size(12.dp),
+                            imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
+                            contentDescription = null,
+                            tint = GrayRegular
+                        )
+                    }
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(0.6F)
-                        .constrainAs(setting) {
-                            start.linkTo(parent.start)
-                            top.linkTo(profile.bottom)
-                            end.linkTo(parent.end)
-                            horizontalBias = 0F
-                        }
-                        .padding(top = 10.dp)
-                        .clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                            onClick = onSettingsClick
-                        ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
+                    Row(
                         modifier = Modifier
-                            .weight(1F)
-                            .padding(vertical = 10.dp),
-                        text = stringResource(R.string.settings),
-                        style = TextStyle(
-                            fontFamily = FontFamily(Font(R.font.gilroy_semi_bold)),
-                            fontSize = 12.sp,
-                            color = GrayRegular
+                            .fillMaxWidth(0.6F)
+                            .constrainAs(setting) {
+                                start.linkTo(parent.start)
+                                top.linkTo(profile.bottom)
+                                end.linkTo(parent.end)
+                                horizontalBias = 0F
+                            }
+                            .padding(top = 10.dp)
+                            .clickable(
+                                indication = null,
+                                interactionSource = remember { MutableInteractionSource() },
+                                onClick = onSettingsClick
+                            ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .weight(1F)
+                                .padding(vertical = 10.dp),
+                            text = stringResource(R.string.settings),
+                            style = TextStyle(
+                                fontFamily = FontFamily(Font(R.font.gilroy_semi_bold)),
+                                fontSize = 12.sp,
+                                color = GrayRegular
+                            )
                         )
-                    )
 
-                    Icon(
-                        modifier = Modifier.size(12.dp),
-                        imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
-                        contentDescription = null,
-                        tint = GrayRegular
-                    )
+                        Icon(
+                            modifier = Modifier.size(12.dp),
+                            imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
+                            contentDescription = null,
+                            tint = GrayRegular
+                        )
+                    }
                 }
 
                 Button(
                     modifier = Modifier
                         .constrainAs(logout) {
                             start.linkTo(parent.start)
-                            top.linkTo(setting.bottom)
+                            top.linkTo(setting.bottom, margin = if (!isShowMenu) 40.dp else 0.dp)
                             end.linkTo(parent.end)
                             horizontalBias = 0F
                         }
@@ -415,6 +446,7 @@ private fun ModalNavigationDrawerContent(
 private fun ModalNavigationDrawerContentPreview() {
     MedifyTheme {
         ModalNavigationDrawerContent(
+            isShowMenu = true,
             onCloseClick = {},
             onMyProfileClick = {},
             onSettingsClick = {},
