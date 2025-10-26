@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -583,12 +584,13 @@ private fun RegistrationContent(
                         (uiState.password.isNotBlank() && uiState.password.length >= 8) &&
                         (uiState.confirmPassword.isNotBlank() && uiState.confirmPassword.length >= 8 && uiState.confirmPassword == uiState.password),
                 shape = RoundedCornerShape(8.dp),
+                contentPadding = PaddingValues.Zero,
                 onClick = onRegisterClick,
                 content = {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 6.dp),
+                            .padding(vertical = 12.dp, horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
