@@ -76,4 +76,12 @@
     <string name="terms_and_conditions">Syarat dan Ketentuan</string>
     <string name="faq">FAQ</string>
     <string name="logout">Keluar</string>
+    <string name="profile_tab_profile">Profile Saya</string>
+    <string name="profile_tab_settings">Pengaturan</string>
+    <string name="profile_completion_message">Lengkapi profil anda untuk memaksimalkan penggunaan aplikasi</string>
+    <string name="profile_select_data_title">Pilih data yang ingin ditampilkan</string>
+    <string name="profile_personal_data_title">Data Diri</string>
+    <string name="profile_personal_data_description">Data diri anda sesuai KTP</string>
+    <string name="profile_security_notice">Pastikan profil anda terisi dengan benar, data pribadi anda terjamin keamanannya</string>
+    <string name="profile_save_button">Simpan Profil</string>
 </resources>

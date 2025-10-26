@@ -77,4 +77,12 @@
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="faq">FAQ</string>
     <string name="logout">Logout</string>
+    <string name="profile_tab_profile">My Profile</string>
+    <string name="profile_tab_settings">Settings</string>
+    <string name="profile_completion_message">Complete your profile to maximize app usage</string>
+    <string name="profile_select_data_title">Select the data you want to display</string>
+    <string name="profile_personal_data_title">Personal Data</string>
+    <string name="profile_personal_data_description">Your personal data according to your ID card</string>
+    <string name="profile_security_notice">Make sure your profile is filled in correctly, your personal data is securely protected</string>
+    <string name="profile_save_button">Save Profile</string>
 </resources>
