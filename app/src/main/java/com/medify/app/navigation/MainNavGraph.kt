@@ -34,17 +34,33 @@ fun MainNavGraph() {
             }
         }
         composable(route = Screen.Dashboard.route) {
-            DashboardScreen {
-                navController.navigate(Screen.Login.route) {
-                    popUpTo(navController.graph.startDestinationId) {
-                        inclusive = true
+            DashboardScreen(
+                onMyProfileClick = {
+                    navController.navigate(Screen.Profile.route)
+                },
+                onSettingsClick = {
+                    navController.navigate(Screen.Profile.route)
+                },
+                onLogoutClick = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0)
+                        launchSingleTop = true
                     }
-                    launchSingleTop = true
                 }
-            }
+            )
         }
         composable(route = Screen.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(
+                onSaveProfileClick = {
+                    navController.navigateUp()
+                },
+                onLogoutClick = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0)
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
     }
 }
