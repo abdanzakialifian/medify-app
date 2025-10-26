@@ -91,7 +91,12 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DashboardScreen(viewModel: DashboardViewModel = koinViewModel(), onLogoutClick: () -> Unit) {
+fun DashboardScreen(
+    viewModel: DashboardViewModel = koinViewModel(),
+    onMyProfileClick: () -> Unit,
+    onSettingsClick: () -> Unit,
+    onLogoutClick: () -> Unit,
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val activity = LocalActivity.current
@@ -120,20 +125,8 @@ fun DashboardScreen(viewModel: DashboardViewModel = koinViewModel(), onLogoutCli
                 Toast.LENGTH_SHORT
             ).show()
         },
-        onMyProfileClick = {
-            Toast.makeText(
-                activity,
-                activity?.resources?.getString(R.string.feature_not_available),
-                Toast.LENGTH_SHORT
-            ).show()
-        },
-        onSettingsClick = {
-            Toast.makeText(
-                activity,
-                activity?.resources?.getString(R.string.feature_not_available),
-                Toast.LENGTH_SHORT
-            ).show()
-        },
+        onMyProfileClick = onMyProfileClick,
+        onSettingsClick = onSettingsClick,
         onLogoutClick = onLogoutClick,
         onSocialMediaClick = {
             Toast.makeText(
@@ -160,10 +153,6 @@ private fun DashboardContent(
     onLogoutClick: () -> Unit,
     onSocialMediaClick: () -> Unit,
 ) {
-    val context = LocalContext.current
-
-    val coroutineScope = rememberCoroutineScope()
-
     ContainerNavigationDrawer(
         onFeatureNotAvailable = onFeatureNotAvailable,
         onMyProfileClick = onMyProfileClick,
@@ -171,6 +160,10 @@ private fun DashboardContent(
         onLogoutClick = onLogoutClick,
         onSocialMediaClick = onSocialMediaClick
     ) { innerPadding ->
+        val context = LocalContext.current
+
+        val coroutineScope = rememberCoroutineScope()
+
         val productPagerState = rememberPagerState(pageCount = { categories.size })
 
         val serviceTypePagerState = rememberPagerState(pageCount = { serviceTypeCategories.size })
@@ -257,9 +250,11 @@ private fun DashboardContent(
                                 horizontalBias = 0F
                             },
                             shape = RoundedCornerShape(8.dp),
+                            contentPadding = PaddingValues.Zero,
                             onClick = onFeatureNotAvailable,
                             content = {
                                 Text(
+                                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
                                     text = stringResource(R.string.button_more),
                                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                                     color = MaterialTheme.colorScheme.onPrimary
